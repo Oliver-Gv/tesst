@@ -1,0 +1,68 @@
+import java.security.SecureRandom;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        SecureRandom secureRandom = new SecureRandom();
+        int level, correctCount = 0;
+
+        do {
+            System.out.println("Por favor seleccione el nivel de dificultad (1, 2, 3 o 4):");
+            System.out.println("1. Números de un dígito.");
+            System.out.println("2. Números de dos dígitos.");
+            System.out.println("3. Números de tres dígitos.");
+            System.out.println("4. Aleatorio (mezcla de todos los niveles).");
+            level = scanner.nextInt();
+        } while (level < 1 || level > 4);
+
+        for (int i = 1; i <= 5; i++) {
+            int num1, num2, answer, userAnswer;
+            String message;
+            switch (level) {
+                case 1:
+                    num1 = secureRandom.nextInt(10);
+                    num2 = secureRandom.nextInt(10);
+                    answer = num1 + num2;
+                    message = "Cuanto es " + num1 + " + " + num2 + "?";
+                    break;
+                case 2:
+                    num1 = secureRandom.nextInt(100);
+                    num2 = secureRandom.nextInt(100);
+                    answer = num1 + num2;
+                    message = "Cuanto es " + num1 + " + " + num2 + "?";
+                    break;
+                case 3:
+                    num1 = secureRandom.nextInt(1000);
+                    num2 = secureRandom.nextInt(1000);
+                    answer = num1 + num2;
+                    message = "Cuanto es " + num1 + " + " + num2 + "?";
+                    break;
+                default:
+                    level = secureRandom.nextInt(3) + 1;
+                    i--;
+                    continue;
+            }
+            System.out.println("Pregunta " + i + ": " + message);
+            userAnswer = scanner.nextInt();
+            if (userAnswer == answer) {
+                String[] positiveResponses = {"¡Muy bien!", "¡Excelente!", "¡Buen trabajo!", "¡Sigue así!"};
+                int responseIndex = secureRandom.nextInt(4);
+                System.out.println(positiveResponses[responseIndex]);
+                correctCount++;
+            } else {
+                String[] negativeResponses = {"No. Por favor intenta de nuevo.", "Incorrecto. Intenta una vez más.",
+                        "¡No te rindas!", "No. Sigue intentando."};
+                int responseIndex = secureRandom.nextInt(4);
+                System.out.println(negativeResponses[responseIndex]);
+            }
+        }
+        double percentage = (double) correctCount / 5 * 100;
+        if (percentage >= 75) {
+            System.out.println("Felicidades, estás listo para pasar al siguiente nivel!");
+        } else {
+            System.out.println("Por favor pide ayuda adicional a tu instructor.");
+        }
+    }
+}
