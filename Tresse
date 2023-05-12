@@ -1,0 +1,25 @@
+@startuml
+class Autos {
+  - marca: string
+  - modelo: string
+  - color: string
+  - año: int
+  + mostrarCaracteristicas(): void
+}
+class Eléctricos {
+  - voltaje: int
+  - capacidadBateria: int
+  - tiempoCarga: string
+  + mostrarCaracteristicas(): void
+}
+class Híbridos {
+  - voltaje: int
+  - capacidadBateria: int
+  - tiempoCarga: string
+  - tipoCombustible: string
+  - capacidadTanque: int
+  + mostrarCaracteristicas(): void
+}
+Autos <|-- Eléctricos
+Autos <|-- Híbridos
+@enduml
